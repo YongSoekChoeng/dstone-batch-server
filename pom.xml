@@ -13,25 +13,29 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<!-- JSP는 1.4.2버전 이하는 jar로도 동작하고 1.4.2버전 이상은 war로 패키징 해야 동작 -->
-		<version>2.7.0</version>
+		<version>2.4.5</version>
 	</parent>
 	
-	<properties>
-		<!-- Java -->
+	<properties>	
+		<main.class>net.dstone.common.DstoneBatchServer</main.class>	
 		<java.version>1.8</java.version>
-		<!-- Web -->
-		<jsp.version>2.2.1</jsp.version>
-		<jstl.version>1.2.1</jstl.version>
-		<servlet.version>3.0.1</servlet.version>
-		<!-- Maven-Plugin -->
-		<maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
-		<!-- Log4j -->
 		<log4j.version>2.24.3</log4j.version>
-		<!-- Dl4j(AI) -->
-		<dl4j.version>1.0.0-M1.1</dl4j.version>
+		<lightmin.server.version>2.2.1</lightmin.server.version>
+		<maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
+		<!--  
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		<maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+		<maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+		<maven-war-plugin.version>3.3.1</maven-war-plugin.version>
+		<maven-deploy-plugin.version>3.1.3</maven-deploy-plugin.version>
+		-->
 	</properties>
-	
+
 	<repositories>
         <repository>
             <id>central</id>
@@ -74,7 +78,7 @@
 		<dependency>
 			<groupId>org.tuxdevelop</groupId>
 			<artifactId>spring-batch-lightmin-server-standalone</artifactId>
-		  	<version>2.2.0</version>
+		  	<version>${lightmin.server.version}</version>
 		    <exclusions>
 		        <exclusion>
 				    <groupId>ch.qos.logback</groupId>
@@ -89,17 +93,17 @@
 		<dependency>
 			<groupId>org.tuxdevelop</groupId>
 			<artifactId>spring-batch-lightmin-repository-server</artifactId>
-			<version>2.2.0</version>
+			<version>${lightmin.server.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tuxdevelop</groupId>
 			<artifactId>spring-batch-lightmin-repository-jdbc</artifactId>
-		  	<version>2.2.0</version>
+		  	<version>${lightmin.server.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tuxdevelop</groupId>
 			<artifactId>spring-batch-lightmin-server-scheduler-repository-jdbc</artifactId>
-			<version>2.2.0</version>
+			<version>${lightmin.server.version}</version>
 		</dependency>
 		
 		<!-- DATABASE -->
@@ -176,15 +180,15 @@
 	</dependencies>
 	
 	<dependencyManagement>
-	    <dependencies>
-	        <dependency>
-	            <groupId>org.springframework.cloud</groupId>
-	            <artifactId>spring-cloud-dependencies</artifactId>
-	            <version>2021.0.9</version>
-	            <type>pom</type>
-	            <scope>import</scope>
-	        </dependency>	
-	    </dependencies>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2020.0.6</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
 	</dependencyManagement>
 
     <build>
@@ -221,8 +225,8 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+        
 		<plugins>
-		
 			<!-- 이클립스에서 메이븐 사용하기 위한 플러그인 -->
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -264,10 +268,9 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<includeSystemScope>false</includeSystemScope>
-					<mainClass>net.dstone.common.DstoneBatchServer</mainClass>
+					<mainClass>${main.class}</mainClass>
 				</configuration>
 			</plugin>
-
 		</plugins>
 		
     </build>

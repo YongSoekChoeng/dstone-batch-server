@@ -11,7 +11,7 @@ server:
         whitelabel: 
             enabled: true
     servlet: 
-        context-path: /
+        context-path: /lightadmin
         jsp: 
             init-parameters: 
                 development: true
@@ -40,36 +40,31 @@ spring:
         username: ENC(tGnzOrm3eG/HcfRqgFO+VjbZ/2ZHQsR0Pt1hn8wpEXo=)
         password: ENC(bA7pEFbRRsL1NT+y9DZyq9z6+R6JqarooxqCr/DxG0w=)
     # 스프링배치        
-    batch:    
-        lightmin: 
-            batch: 
+    batch:
+        lightmin:
+            batch:
                 repository-type: jdbc
                 table-prefix: "BATCH_"
-            repository: 
-                jdbc: 
+            repository:
+                jdbc:
                     job-configuration-table-name: "BATCH_JOB_CONFIGURATION"
                     job-configuration-value-table-name: "BATCH_JOB_CONFIGURATION_VALUE"
                     job-configuration-parameter-table-name: "BATCH_JOB_CONFIGURATION_PARAMETERS"
-            server: 
-                polling-interval: 5000
-                enable-discovery: false
-                metrics-enabled: true   
-                repository: 
-                    db-type: mysql
-                    table-prefix: BATCH_
-                scheduler: 
+            server:
+                scheduler:
                     enabled: true
                     poller-period-retry: 86400000 # 클라이언트의 상태(health)를 주기적으로 확인하는 간격 (단위: 밀리초, 현재: 하루=86400000ms)
                     poller-period: 86400000 # 클라이언트 상태 확인에 실패했을 경우 재시도 간격 (단위: 밀리초, 현재: 하루=86400000ms)
-                    jdbc: 
-                        table-prefix: BATCH_
-                    repository: 
-                        jdbc: 
-                            table-prefix: BATCH_
-                            # always 또는 never
-                            initialize-schema: never
-                            # 이전에 발생했던 에러 해결을 위해 H2, MySQL, PostgreSQL, Oracle 등 정확한 DB 타입을 입력해야 합니다.
-                            platform: MySQL 
+                    repository:
+                        delete-finished: true
+                        keep-finished: PT24H
+                        delete-lost: true
+                        jdbc:
+                            configuration-table: BATCH_SCHEDULER_CONFIGURATION
+                            database-schema: FRAMEQ
+                            configuration-value-table: BATCH_SCHEDULER_CONFIGURATION_VALUE
+                            datasource-name: dataSource
+                            execution-table: BATCH_SCHEDULER_EXECUTION
 logging: 
     level: 
         org.tuxdevelop.spring.batch.lightmin: DEBUG # Lightmin 관련 상세 로그
