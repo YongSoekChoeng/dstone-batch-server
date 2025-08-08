@@ -34,7 +34,7 @@ spring:
     main: 
         allow-bean-definition-overriding: true
     datasource: 
-        name: lightmin-server-internal-db
+        name: dstone-batch-server-internal-db
         url: jdbc:mysql://localhost:3306/sampleDB
         driver-class-name: com.mysql.cj.jdbc.Driver
         username: ENC(tGnzOrm3eG/HcfRqgFO+VjbZ/2ZHQsR0Pt1hn8wpEXo=)
@@ -65,9 +65,3 @@ spring:
                             configuration-value-table: BATCH_SCHEDULER_CONFIGURATION_VALUE
                             datasource-name: dataSource
                             execution-table: BATCH_SCHEDULER_EXECUTION
-logging: 
-    level: 
-        org.tuxdevelop.spring.batch.lightmin: DEBUG # Lightmin 관련 상세 로그
-        org.springframework.batch: INFO # Spring Batch 관련 로그
-        org.springframework.jdbc.core: DEBUG # JDBC 쿼리 로그 (DB 연결 문제 디버깅 시 유용)
-        
