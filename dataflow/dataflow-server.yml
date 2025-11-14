@@ -5,6 +5,8 @@ spring:
   cloud: 
     dataflow: 
       task: 
+        data-source:
+          schema-target: BOOT2
         initialize-enabled: false
         table-prefix: TASK_
         platform: 
