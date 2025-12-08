@@ -12,7 +12,10 @@ spring:
           local: 
             accounts: 
               default: 
-                workingDirectoriesRoot: ${user.home}/dataflow/tasks		
+                workingDirectoriesRoot: ${user.home}/dataflow/tasks	
+      featueres: 
+        streams-enabled: false
+        skipper-enabled: false
     scheduler: 
       cron4j: 
         enabled: true
