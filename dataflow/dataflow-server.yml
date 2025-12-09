@@ -16,6 +16,7 @@ spring:
       featueres: 
         streams-enabled: false
         skipper-enabled: false
+        tasks-enabled: true
     scheduler: 
       cron4j: 
         enabled: true
