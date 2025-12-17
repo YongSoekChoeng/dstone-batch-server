@@ -1,3 +1,3 @@
 #! /bin/sh
 
-java -jar ./skipper/spring-cloud-skipper-server-2.11.5.jar
+java -jar ./target/spring-cloud-skipper-server-2.11.5.jar
