@@ -50,14 +50,14 @@ services:
     networks:
       - dstone-network
     environment:
-      spring.profiles.active: dev
+      # OS 레벨 환경 변수로 세팅하면 JVM이 자동으로 읽어들임
+      JAVA_TOOL_OPTIONS=-Dspring.profiles.active=dev
     command:
       - /bin/bash
       - -c
       - |
         echo "Starting Dataflow Server..."
-        cd /workshop/dstone-batch-server/bin
-        ./01.dataflow.sh
+        java -Dspring.profiles.active=dev -jar ../target/spring-cloud-dataflow-server-2.11.5.jar --spring.config.location=../conf/dataflow-server.yml
     restart: unless-stopped
     #restart: "no"
 
