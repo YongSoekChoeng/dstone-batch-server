@@ -1,30 +1,30 @@
 ########################################################################################
 # <사전작업>
 # 1. 작업디렉토리 결정 후 템플릿 복사.
-#   /workshop/dstone-batch
+#   /workshop/dstone-batch-server
 # <작업명령>
 # 1. Docker Compose 실행
-#   - docker-compose -p dstone -f /workshop/dstone-batch/01.dstone-batch-docker.yml up -d
+#   - docker-compose -p dstone -f /workshop/dstone-batch-server/01.dstone-batch-server-docker.yml up -d
 # 2. 로그 확인
-#   - docker-compose -p dstone -f /workshop/dstone-batch/01.dstone-batch-docker.yml logs -f dstone-batch
+#   - docker-compose -p dstone -f /workshop/dstone-batch-server/01.dstone-batch-server-docker.yml logs -f dstone-batch-server
 # 3. 중지 및 삭제
-#   - docker-compose -p dstone -f /workshop/dstone-batch/01.dstone-batch-docker.yml down -v
+#   - docker-compose -p dstone -f /workshop/dstone-batch-server/01.dstone-batch-server-docker.yml down -v
 ########################################################################################
 services:
 
   # Application 프레임웍 
-  dstone-batch:
+  dstone-batch-server:
     
     # ---------- 최초작업일 때 ---------------------- #
     image: eclipse-temurin:21-jdk
     # --------------------------------------------- #    
     # ---------- Docker Hub 에서 가져올 때 ---------- #
-    # image: jysn007/dstone-batch:latest
+    # image: jysn007/dstone-batch-server:latest
     # --------------------------------------------- #
     
-    container_name: dstone-batch
+    container_name: dstone-batch-server
     ports:
-      - "6081:6081"
+      - "9393:9393"
     ###########################################################  
     # 서비스 내부 Volumes (바인드 마운트 vs 볼륨 참조)
     # A.타입 1: 바인드 마운트 (Bind Mount)
@@ -44,16 +44,17 @@ services:
     #      컨테이너위치 : /var/lib/postgresql/data
     ###########################################################    
     volumes:
-      - /workshop/dstone-batch/target/dstone-batch-0.0.1-SNAPSHOT.jar:/workshop/dstone-batch/target/dstone-batch-0.0.1-SNAPSHOT.jar
-      - /workshop/dstone-batch/conf:/workshop/dstone-batch/conf
+      - /workshop/dstone-batch-server/target/dstone-batch-server-0.0.1-SNAPSHOT.jar:/workshop/dstone-batch-server/target/dstone-batch-server-0.0.1-SNAPSHOT.jar
+      - /workshop/dstone-batch-server/conf:/workshop/dstone-batch-server/conf
+      - /workshop/dstone-batch-server/bin:/workshop/dstone-batch-server/bin
     networks:
       - dstone-network
     command:
       - /bin/bash
       - -c
       - |
-        echo "Starting Spring Boot Application..."
-        java -Xms512m -Xmx1024m -Dspring.profiles.active=dev -jar /workshop/dstone-batch/target/dstone-batch.war net.dstone.batch.common.DstoneBatchApplication
+        echo "Starting Dataflow Server..."
+        /workshop/dstone-batch-server/bin/01.dataflow.sh
     restart: unless-stopped
     #restart: "no"
 
