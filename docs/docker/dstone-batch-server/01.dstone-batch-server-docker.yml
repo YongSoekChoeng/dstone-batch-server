@@ -49,9 +49,6 @@ services:
       - /workshop/dstone-batch-server/bin:/workshop/dstone-batch-server/bin
     networks:
       - dstone-network
-    environment:
-      # OS 레벨 환경 변수로 세팅하면 JVM이 자동으로 읽어들임
-      JAVA_TOOL_OPTIONS=-Dspring.profiles.active=dev
     command:
       - /bin/bash
       - -c
