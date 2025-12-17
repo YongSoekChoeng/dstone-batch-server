@@ -44,7 +44,7 @@ services:
     #      컨테이너위치 : /var/lib/postgresql/data
     ###########################################################    
     volumes:
-      - /workshop/dstone-batch-server/target/dstone-batch-server-0.0.1-SNAPSHOT.jar:/workshop/dstone-batch-server/target/dstone-batch-server-0.0.1-SNAPSHOT.jar
+      - /workshop/dstone-batch-server/target:/workshop/dstone-batch-server/target
       - /workshop/dstone-batch-server/conf:/workshop/dstone-batch-server/conf
       - /workshop/dstone-batch-server/bin:/workshop/dstone-batch-server/bin
     networks:
@@ -54,7 +54,8 @@ services:
       - -c
       - |
         echo "Starting Dataflow Server..."
-        /workshop/dstone-batch-server/bin/01.dataflow.sh
+        cd /workshop/dstone-batch-server/bin
+        ./01.dataflow.sh
     restart: unless-stopped
     #restart: "no"
 
