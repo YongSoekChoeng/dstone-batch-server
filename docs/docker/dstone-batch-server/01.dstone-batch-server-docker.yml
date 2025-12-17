@@ -49,6 +49,8 @@ services:
       - /workshop/dstone-batch-server/bin:/workshop/dstone-batch-server/bin
     networks:
       - dstone-network
+    environment:
+      spring.profiles.active: dev
     command:
       - /bin/bash
       - -c
