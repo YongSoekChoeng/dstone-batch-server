@@ -46,7 +46,6 @@ services:
     volumes:
       - /workshop/dstone-batch-server/target:/workshop/dstone-batch-server/target
       - /workshop/dstone-batch-server/conf:/workshop/dstone-batch-server/conf
-      - /workshop/dstone-batch-server/bin:/workshop/dstone-batch-server/bin
     networks:
       - dstone-network
     command:
@@ -54,7 +53,7 @@ services:
       - -c
       - |
         echo "Starting Dataflow Server..."
-        java -Dspring.profiles.active=dev -jar ../target/spring-cloud-dataflow-server-2.11.5.jar --spring.config.location=../conf/dataflow-server.yml
+        java -Dspring.profiles.active=dev -jar /workshop/dstone-batch-server/target/spring-cloud-dataflow-server-2.11.5.jar --spring.config.location=/workshop/dstone-batch-server/conf/dataflow-server.yml
     restart: unless-stopped
     #restart: "no"
 
