@@ -44,8 +44,12 @@ services:
     #      컨테이너위치 : /var/lib/postgresql/data
     ###########################################################    
     volumes:
+      # dstone-batch-server(배치관리프로그램)용 설정
       - /workshop/dstone-batch-server/target:/workshop/dstone-batch-server/target
       - /workshop/dstone-batch-server/conf:/workshop/dstone-batch-server/conf
+      # dstone-batch(배치프로그램)용 설정
+      - /workshop/dstone-batch/target:/workshop/dstone-batch/target
+      - /workshop/dstone-batch/conf:/workshop/dstone-batch/conf
     networks:
       - dstone-network
     command:
