@@ -24,6 +24,7 @@ mkdir %TO_ROOT%\dstone-batch-server\conf
 mkdir %TO_ROOT%\dstone-batch-server\target
 copy  %FROM_ROOT%\dstone-batch-server\conf\* %TO_ROOT%\dstone-batch-server\conf
 copy  %FROM_ROOT%\dstone-batch-server\target\*.jar %TO_ROOT%\dstone-batch-server\target
+copy  %FROM_ROOT%\dstone-batch-server\docs\docker\dstone-batch-server\env.properties %TO_ROOT%\dstone-batch-server
 copy  %FROM_ROOT%\dstone-batch-server\docs\docker\dstone-batch-server\01.dstone-batch-server-docker.yml %TO_ROOT%\dstone-batch-server
 copy  %FROM_ROOT%\dstone-batch-server\docs\docker\dstone-batch-server\02.dstone-batch-server-docker-reg.sh %TO_ROOT%\dstone-batch-server
 
