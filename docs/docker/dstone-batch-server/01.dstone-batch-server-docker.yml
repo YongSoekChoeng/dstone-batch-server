@@ -24,6 +24,8 @@ services:
     container_name: dstone-batch-server
     ports:
       - "9393:9393"
+    env_file:
+      - ./conf/env-dev.properties
     ###########################################################  
     # 서비스 내부 Volumes (바인드 마운트 vs 볼륨 참조)
     # A.타입 1: 바인드 마운트 (Bind Mount)
