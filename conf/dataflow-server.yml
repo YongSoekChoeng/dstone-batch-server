@@ -35,9 +35,7 @@ spring:
   jpa: 
     database-platform: org.hibernate.dialect.MySQL57Dialect  # 추가
     hibernate: 
-      ddl-auto: none # none/update 
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update # none/update 
     show-sql: true
     properties: 
       hibernate: 
